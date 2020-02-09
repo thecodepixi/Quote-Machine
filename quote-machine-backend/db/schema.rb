@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 2020_02_09_175308) do
 
   create_table "quotes", force: :cascade do |t|
     t.text "content"
+    t.integer "author_id"
+    t.integer "theme_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
