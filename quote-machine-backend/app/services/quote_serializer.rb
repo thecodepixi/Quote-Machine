@@ -8,7 +8,7 @@ class QuoteSerializer
     @quote.to_json( :include => {
       :author => { :only => [:name] },
       :theme => { :only => [:name] }
-    }, only: [:content])
+    }, only: [:id, :content])
   end 
 
 end 
