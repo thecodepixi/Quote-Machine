@@ -16,10 +16,23 @@ class Quote {
       author.classList.add('is-uppercase')
       let theme = document.createElement('small')
       theme.textContent = this.theme
+
+      let buttonDiv = document.createElement('div')
+      buttonDiv.classList.add('buttons', 'is-pulled-right')
+      let editButton = document.createElement('button')
+      editButton.textContent = 'Edit'
+      editButton.classList.add('tag', 'is-dark')
+      editButton.id = this.id 
+      let deleteButton = document.createElement('button')
+      deleteButton.textContent = 'Delete'
+      deleteButton.classList.add('tag', 'is-danger')
+      buttonDiv.appendChild(editButton)
+      buttonDiv.appendChild(deleteButton)
       let hr = document.createElement('hr')
       thisDiv.appendChild(quoteText) 
       thisDiv.appendChild(author)
       thisDiv.appendChild(theme)
+      thisDiv.appendChild(buttonDiv)
       thisDiv.appendChild(hr)
       return thisDiv 
   }
