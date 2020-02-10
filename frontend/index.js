@@ -7,6 +7,7 @@ class Quote {
 
   createQuoteElement(){
     let thisDiv = document.createElement('div')
+    thisDiv.classList.add("quote")
       let quoteText = document.createElement('p')
       quoteText.textContent = this.content 
       let author = document.createElement('small')
@@ -28,21 +29,24 @@ class Quote {
   }
 }
 
-function getRandomQuote(quotesObject) {
-  let quotesArray = Object.values(quotesObject)
+function fetchRandomQuote(quotesObject) {
   let randomInt = Math.floor(Math.random() * quotesArray.length ) 
   
   return quotesArray[randomInt]
 }
 
 function renderRandomQuote(quote){
-  let randomQuote = new Quote(quote.content, quote.author.name, quote.theme.name)
+  let quoteQuantity = document.querySelectorAll("div.quote").count
+  let randomQuoteIndex = Math.floor(Math.random() * quoteQuantity)
 
+  fetch(`http://localhost:3000/quotes/${randomQuoteIndex}`)
+    .then(resp => resp.json())
+    .then(json => console.log(json))
 }
 
 
 document.addEventListener("DOMContentLoaded", () => {
-  
+
   // Render All Quotes 
   fetch('http://localhost:3000/quotes/')
   .then(resp => resp.json())
@@ -55,8 +59,6 @@ document.addEventListener("DOMContentLoaded", () => {
       let thisQuoteDiv = thisQuote.createQuoteElement(); 
       container.appendChild(thisQuoteDiv)
     }
-
-    getRandomQuote(quotes)
   }
 
 // Hide & Show navbar info element 
