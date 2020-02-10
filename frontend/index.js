@@ -21,6 +21,24 @@ class Quote {
       thisDiv.appendChild(hr)
       return thisDiv 
   }
+
+  renderAsRandom(){
+    let thisDiv = document.createElement('div')
+    
+  }
+}
+
+function getRandomQuote(quotesObject) {
+  let quotesArray = Object.values(quotesObject)
+  let randomInt = Math.floor(Math.random() * quotesArray.length ) 
+  
+  return quotesArray[randomInt]
+}
+
+function renderRandomQuote(quote){
+  let randomQuote = new Quote(quote.content, quote.author.name, quote.theme.name)
+  let randomQuoteDiv = randomQuote.createQuoteElement()
+
 }
 
 
@@ -38,13 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let thisQuoteDiv = thisQuote.createQuoteElement(); 
       container.appendChild(thisQuoteDiv)
     }
-  }
 
-  // Render a random quote in the main section 
-  function renderRandomQuote(quotes) {
-    let mainQuoteHero = document.getElementById('main-quote')
-    let quote  = document.createElement('h2')
-    
-    mainQuoteHero.appendChild(quote)
+    getRandomQuote(quotes)
   }
 })
