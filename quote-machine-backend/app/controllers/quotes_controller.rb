@@ -14,4 +14,15 @@ class QuotesController < ApplicationController
     render json: QuoteSerializer.new(quote).to_serialized_json
   end 
 
+  def create
+    quote = Quote.new(content: params[:content])
+    quote.author = Author.find_or_create_by(name: params[:author])
+    quote.theme = Theme.find_or_create_by(name: params[:theme])
+    if quote.save 
+      render json: QuoteSerializer.new(quote).to_serialized_json
+    else 
+      render json: {message: "Sorry! There was an error with your quote."}
+    end 
+  end 
+
 end

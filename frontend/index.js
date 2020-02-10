@@ -54,12 +54,13 @@ class Quote {
      body: JSON.stringify(this)  
     })
       .then(resp => resp.json())
-      .then(json => console.log(json))
+      .then(json => {
+        let newQuote = new Quote(json.id, json.content, json.author.name, json.theme.name)
+        let container = document.getElementById('quote-container')
+        let thisQuoteDiv = newQuote.createQuoteElement(); 
+        container.prepend(thisQuoteDiv) 
+      })
   }
-}
-
-function createNewQuote(){
-  
 }
 
 function fetchRandomQuote() {
@@ -79,9 +80,10 @@ function renderQuotes(quotes){
     let container = document.getElementById('quote-container')
     let thisQuote = new Quote(quote.id, quote.content, quote.author.name, quote.theme.name)
     let thisQuoteDiv = thisQuote.createQuoteElement(); 
-    container.appendChild(thisQuoteDiv)
+    container.prepend(thisQuoteDiv)
   }
 }
+
 
 // DOM CONTENT LOADED -- call functions here 
 document.addEventListener("DOMContentLoaded", () => {
@@ -91,43 +93,56 @@ document.addEventListener("DOMContentLoaded", () => {
   .then(resp => resp.json())
   .then(json => renderQuotes(json))
 
-// populate hero with initial random quote 
-fetchRandomQuote()
+  // populate hero with initial random quote 
+  fetchRandomQuote()
 
-// Random quote event listener
-  let reloadButton = document.getElementById('random-quote-reload')
-  reloadButton.addEventListener("click", () =>{
-    fetchRandomQuote()
-  })
+  // Random quote event listener
+    let reloadButton = document.getElementById('random-quote-reload')
+    reloadButton.addEventListener("click", () =>{
+      fetchRandomQuote()
+    })
 
-// Hide & Show navbar info element 
-  let navbarButton = document.getElementById("info-activate")
-  let navbarInfo = document.getElementById("navbar-info")
-  navbarInfo.style.display = "none"
-  navbarButton.addEventListener("click", () => {
-    if(navbarInfo.style.display === "none") {
-      navbarInfo.style.display = "block"
-      navbarInfo.style.position = "absolute"
-      navbarInfo.style.zIndex = 1
+  // Hide & Show navbar info element 
+    let navbarButton = document.getElementById("info-activate")
+    let navbarInfo = document.getElementById("navbar-info")
+    navbarInfo.style.display = "none"
+    navbarButton.addEventListener("click", () => {
+      if(navbarInfo.style.display === "none") {
+        navbarInfo.style.display = "block"
+        navbarInfo.style.position = "absolute"
+        navbarInfo.style.zIndex = 1
+      } else {
+        navbarInfo.style.display = "none"
+      }
+    })
+
+    //Hide & Show All Quotes 
+    let showAllButton = document.getElementById('show-quotes')
+    let allQuotes = document.getElementById('quote-container')
+    let showAllIcon = document.getElementById('show-all-icon')
+    showAllButton.addEventListener("click", () => {
+    if(allQuotes.style.display === "none") {
+      allQuotes.style.display = "block"
+      showAllIcon.classList.add("fa-angle-double-down")
+      showAllIcon.classList.remove("fa-bars")
     } else {
-      navbarInfo.style.display = "none"
+      allQuotes.style.display = "none"
+      showAllIcon.classList.add("fa-bars")
+      showAllIcon.classList.remove("fa-angle-double-down")
     }
-  })
+    })
 
-  //Hide & Show All Quotes 
-  let showAllButton = document.getElementById('show-quotes')
-  let allQuotes = document.getElementById('quote-container')
-  let showAllIcon = document.getElementById('show-all-icon')
-  showAllButton.addEventListener("click", () => {
-   if(allQuotes.style.display === "none") {
-     allQuotes.style.display = "block"
-     showAllIcon.classList.add("fa-angle-double-down")
-     showAllIcon.classList.remove("fa-bars")
-   } else {
-     allQuotes.style.display = "none"
-     showAllIcon.classList.add("fa-bars")
-     showAllIcon.classList.remove("fa-angle-double-down")
-   }
-  })
+    // Form submission event listener
+    let submitButton = document.getElementById('submit-quote')
+    submitButton.addEventListener("click", (event) => {
+      let quoteContent = document.getElementById('new-quote-content').value
+      let quoteAuthor = document.getElementById('new-quote-author').value
+      let quoteTheme = document.getElementById('new-quote-theme').value
+      let newQuote = new Quote( 0, quoteContent, quoteAuthor, quoteTheme)
+      
+      newQuote.sendToDB()
+
+      event.preventDefault()
+    })
 
 })
