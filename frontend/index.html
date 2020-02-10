@@ -65,11 +65,48 @@
 
   <!-- NEW QUOTE FORM  -->
 <div class="container">
-  <section class="section">
-    <a role="button" class="is-size-3 has-text-primary">Add a New Quote</a>
-    <form action="post" class="form">
 
+  <section class="section">
+
+    <a role="button" class="is-size-3 has-text-primary">Add a New Quote</a>
+    <form id="quote" action="post" class="form">
+      <div class="field">
+        <label for="content" class="label">Quote Content:</label>
+        <div class="control">
+          <textarea type="textarea" class="textarea" placeholder="Put your quotation here!" rows="5"></textarea>
+        </div>
+      </div>
+      <div class="field">
+        <label for="author" class="label">Quote Author:</label>
+        <div class="control">
+          <input type="text" class="input" placeholder="Author Name">
+        </div>
+      </div>
+      <div class="field">
+        <label for="theme" class="label">Quote Theme:</label>
+        <div class="control">
+          <div class="select">
+            <select name="theme" id="theme">
+              <option value="">Theme</option>
+              <option value="">Theme</option>
+              <option value="">Theme</option>
+              <option value="">Theme</option>
+              <option value="">Theme</option>
+              <option value="">Theme</option>
+              <option value="">Theme</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <p class="control">
+          <button class="button is-primary">
+            Submit
+          </button>
+        </p>
+      </div>
     </form>
+
   </section>
 
  <!-- ALL QUOTES --> 

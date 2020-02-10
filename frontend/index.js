@@ -43,6 +43,23 @@ class Quote {
     randomContent.textContent = this.content 
     randomAuthor.textContent = this.author 
   }
+
+  sendToDB(){
+    fetch('http://localhost:3000/quotes', {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+     }, 
+     body: JSON.stringify(this)  
+    })
+      .then(resp => resp.json())
+      .then(json => console.log(json))
+  }
+}
+
+function createNewQuote(){
+  
 }
 
 function fetchRandomQuote() {
@@ -66,6 +83,7 @@ function renderQuotes(quotes){
   }
 }
 
+// DOM CONTENT LOADED -- call functions here 
 document.addEventListener("DOMContentLoaded", () => {
 
   // Render All Quotes 
