@@ -1,5 +1,6 @@
 class Quote {
-  constructor(content, author, theme){
+  constructor(id, content, author, theme){
+    this.id = id
     this.content = content 
     this.theme = theme 
     this.author = author 
@@ -24,26 +25,33 @@ class Quote {
   }
 
   renderAsRandom(){
-    let thisDiv = document.createElement('div')
-    thisDiv.classList.add()
+    let randomContent = document.getElementById('random-quote-content')
+    let randomAuthor = document.getElementById('random-quote-author')
+    randomContent.textContent = this.content 
+    randomAuthor.textContent = this.author 
   }
 }
 
-function fetchRandomQuote(quotesObject) {
-  let randomInt = Math.floor(Math.random() * quotesArray.length ) 
-  
-  return quotesArray[randomInt]
-}
-
-function renderRandomQuote(quote){
-  let quoteQuantity = document.querySelectorAll("div.quote").count
+function fetchRandomQuote() {
+  let quoteQuantity = document.querySelectorAll("div.quote").length
   let randomQuoteIndex = Math.floor(Math.random() * quoteQuantity)
 
   fetch(`http://localhost:3000/quotes/${randomQuoteIndex}`)
     .then(resp => resp.json())
-    .then(json => console.log(json))
+    .then(json => {
+      let randomQuote = new Quote(json.id, json.content, json.author.name, json.theme.name)
+      randomQuote.renderAsRandom()
+    })
 }
 
+function renderQuotes(quotes){
+  for(quote of quotes) {
+    let container = document.getElementById('quote-container')
+    let thisQuote = new Quote(quote.id, quote.content, quote.author.name, quote.theme.name)
+    let thisQuoteDiv = thisQuote.createQuoteElement(); 
+    container.appendChild(thisQuoteDiv)
+  }
+}
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -52,14 +60,14 @@ document.addEventListener("DOMContentLoaded", () => {
   .then(resp => resp.json())
   .then(json => renderQuotes(json))
 
-  function renderQuotes(quotes){
-    for(quote of quotes) {
-      let container = document.getElementById('quote-container')
-      let thisQuote = new Quote(quote.content, quote.author.name, quote.theme.name)
-      let thisQuoteDiv = thisQuote.createQuoteElement(); 
-      container.appendChild(thisQuoteDiv)
-    }
-  }
+// populate hero with initial random quote 
+fetchRandomQuote()
+
+// Random quote event listener
+  let reloadButton = document.getElementById('random-quote-reload')
+  reloadButton.addEventListener("click", () =>{
+    fetchRandomQuote()
+  })
 
 // Hide & Show navbar info element 
   let navbarButton = document.getElementById("info-activate")
