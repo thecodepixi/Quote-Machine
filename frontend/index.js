@@ -19,14 +19,13 @@ class Quote {
 
       let buttonDiv = document.createElement('div')
       buttonDiv.classList.add('buttons', 'is-pulled-right')
-      let editButton = document.createElement('button')
-      editButton.textContent = 'Edit'
-      editButton.classList.add('tag', 'is-dark')
-      editButton.id = this.id 
       let deleteButton = document.createElement('button')
       deleteButton.textContent = 'Delete'
       deleteButton.classList.add('tag', 'is-danger')
-      buttonDiv.appendChild(editButton)
+      deleteButton.id = this.id 
+      deleteButton.addEventListener("click", () => {
+        deleteQuote(this.id)
+      })
       buttonDiv.appendChild(deleteButton)
       let hr = document.createElement('hr')
       thisDiv.appendChild(quoteText) 
@@ -44,7 +43,7 @@ class Quote {
     randomAuthor.textContent = this.author 
   }
 
-  sendToDB(){
+  sendToDBandRender(){
     fetch('http://localhost:3000/quotes', {
       method: 'POST',
       headers: {
@@ -59,8 +58,26 @@ class Quote {
         let container = document.getElementById('quote-container')
         let thisQuoteDiv = newQuote.createQuoteElement(); 
         container.prepend(thisQuoteDiv) 
+
+        let randomContent = document.getElementById('random-quote-content')
+        let randomAuthor = document.getElementById('random-quote-author')
+        randomContent.textContent = newQuote.content 
+        randomAuthor.textContent = newQuote.author 
       })
   }
+}
+
+function deleteQuote(quoteId){
+  fetch(`http://localhost:3000/quotes/${quoteId}`, {
+    method: 'DELETE',
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    }
+  })
+    .then(resp => resp.json())
+    .then(json => console.log(json))
+    .catch(error => alert(error))
 }
 
 function fetchRandomQuote() {
@@ -135,13 +152,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // Form submission event listener
     let submitButton = document.getElementById('submit-quote')
     submitButton.addEventListener("click", (event) => {
-      let quoteContent = document.getElementById('new-quote-content').value
-      let quoteAuthor = document.getElementById('new-quote-author').value
-      let quoteTheme = document.getElementById('new-quote-theme').value
-      let newQuote = new Quote( 0, quoteContent, quoteAuthor, quoteTheme)
+      let quoteContent = document.getElementById('new-quote-content')
+      let quoteAuthor = document.getElementById('new-quote-author')
+      let quoteTheme = document.getElementById('new-quote-theme')
+      let newQuote = new Quote( 0, quoteContent.value, quoteAuthor.value, quoteTheme.value)
       
-      newQuote.sendToDB()
-
+      newQuote.sendToDBandRender()
+      quoteContent.value = ""
+      quoteAuthor.value = ""
+      
       event.preventDefault()
     })
 

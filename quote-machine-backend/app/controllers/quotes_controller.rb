@@ -25,4 +25,11 @@ class QuotesController < ApplicationController
     end 
   end 
 
+  def destroy 
+    quote = Quote.find_by(id: params[:id])
+    quote.destory 
+
+    resp json: quote 
+  end 
+
 end
