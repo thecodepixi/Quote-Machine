@@ -15,8 +15,8 @@ class QuotesController < ApplicationController
   end 
 
   def create
-    quote = Quote.new(content: params[:content])
-    quote.author = Author.find_or_create_by(name: params[:author])
+    quote = Quote.new(content: params[:content].strip)
+    quote.author = Author.find_or_create_by(name: params[:author].strip)
     quote.theme = Theme.find_or_create_by(name: params[:theme])
     if quote.save 
       render json: QuoteSerializer.new(quote).to_serialized_json
@@ -25,11 +25,11 @@ class QuotesController < ApplicationController
     end 
   end 
 
-  def destroy 
+  def destory 
     quote = Quote.find_by(id: params[:id])
     quote.destory 
 
-    resp json: quote 
+    resp json: QuoteSerializer.new(quote).to_serialized_json 
   end 
 
 end

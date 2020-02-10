@@ -72,7 +72,7 @@ function deleteQuote(quoteId){
     method: 'DELETE',
     headers: {
       "Content-Type": "application/json",
-      "Accept": "application/json"
+      "Accept": "application/json",
     }
   })
     .then(resp => resp.json())
