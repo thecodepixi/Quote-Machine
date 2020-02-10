@@ -10,29 +10,27 @@
 </head>
 <body>
 
-  <nav class="navbar is-dark">
+  <nav class="navbar is-primary">
     <div class="navbar-brand">
       <a href="#" class="navbar-item">
-        <h1 class="">Quote Machine</h1>
+        <h1 class="is-size-3">Quote Machine</h1>
       </a>
     </div>  
-    <div class="navbar-menu">
       <div class="navbar-end">
         <div class="navbar-item">
           <button class="button is-light is-rounded" id="info-activate">Info</button>
         </div>
       </div>
-    </div>
   </nav>
   <div id="navbar-info">
-    <div class="container box">
+    <div class="box">
     <p>This is where some info about this app will go but first I need to make this be hidden by default</p>
     </div>
   </div>
 
   <div class="section">
     <div class="container">
-      <div class="hero is-primary is-bold is-medium" id="main-quote">
+      <div class="hero is-primary is-bold is-large" id="main-quote">
         <div class="hero-body" id="hero-body">
           <div class="container has-text-centered">
             <h1 class="title" id="random-quote-content">Random quote goes here...</h1>
@@ -46,13 +44,13 @@
   
 <div class="container">
   <section class="section">
-    <a role="button" class="is-size-3">Add a New Quote</a>
+    <a role="button" class="is-size-3 has-text-primary">Add a New Quote</a>
     <form action="post" class="form">
 
     </form>
   </section>
   <section class="section">
-    <a role="button" class="is-size-3" id="show-quotes"><i class="fas fa-bars" id="show-all-icon"></i> Show All Quotes</a>
+    <a role="button" class="is-size-3 has-text-primary" id="show-quotes"><i class="fas fa-bars" id="show-all-icon"></i> Show All Quotes</a>
     <div id="quote-container" class="container"><br></div>
   </section>  
 </div>
