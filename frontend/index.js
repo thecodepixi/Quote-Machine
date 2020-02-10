@@ -24,7 +24,7 @@ class Quote {
 
   renderAsRandom(){
     let thisDiv = document.createElement('div')
-    
+    thisDiv.classList.add()
   }
 }
 
@@ -37,7 +37,6 @@ function getRandomQuote(quotesObject) {
 
 function renderRandomQuote(quote){
   let randomQuote = new Quote(quote.content, quote.author.name, quote.theme.name)
-  let randomQuoteDiv = randomQuote.createQuoteElement()
 
 }
 
@@ -59,4 +58,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
     getRandomQuote(quotes)
   }
+
+// Hide & Show navbar info element 
+  let navbarButton = document.getElementById("info-activate")
+  let navbarInfo = document.getElementById("navbar-info")
+  navbarInfo.style.display = "none"
+  navbarButton.addEventListener("click", () => {
+    if(navbarInfo.style.display === "none") {
+      navbarInfo.style.display = "block"
+      navbarInfo.style.position = "absolute"
+      navbarInfo.style.zIndex = 1
+    } else {
+      navbarInfo.style.display = "none"
+    }
+  })
+
+  //Hide & Show All Quotes 
+  let showAllButton = document.getElementById('show-quotes')
+  let allQuotes = document.getElementById('quote-container')
+  let showAllIcon = document.getElementById('show-all-icon')
+  showAllButton.addEventListener("click", () => {
+   if(allQuotes.style.display === "none") {
+     allQuotes.style.display = "block"
+     showAllIcon.classList.add("fa-angle-double-down")
+     showAllIcon.classList.remove("fa-bars")
+   } else {
+     allQuotes.style.display = "none"
+     showAllIcon.classList.add("fa-bars")
+     showAllIcon.classList.remove("fa-angle-double-down")
+   }
+  })
+
 })
