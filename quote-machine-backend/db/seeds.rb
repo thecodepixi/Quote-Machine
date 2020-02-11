@@ -12,7 +12,7 @@ Quote.all.destroy_all
 
 
 until Author.all.count === 10 
-  Author.create(name: Faker::Book.author)
+  Author.find_or_create_by(name: Faker::Book.author.downcase)
 end 
 
 themes = ["inspirational", "wisdom", "humor", "love", "success", "motivational", "joy", "science"] 

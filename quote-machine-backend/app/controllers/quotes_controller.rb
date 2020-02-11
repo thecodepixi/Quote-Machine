@@ -16,8 +16,8 @@ class QuotesController < ApplicationController
 
   def create
     quote = Quote.new(content: params[:content].strip)
-    quote.author = Author.find_or_create_by(name: params[:author].strip)
-    quote.theme = Theme.find_or_create_by(name: params[:theme])
+    quote.author = Author.find_or_create_by(name: params[:author].strip.downcase)
+    quote.theme = Theme.find_or_create_by(name: params[:theme].strip.downcase)
     if quote.save 
       render json: QuoteSerializer.new(quote).to_serialized_json
     else 
