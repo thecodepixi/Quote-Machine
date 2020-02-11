@@ -21,7 +21,7 @@
     </div>  
       <div class="navbar-end">
         <div class="navbar-item">
-          <button class="button is-light is-rounded" id="info-activate"><i class="fas fa-bars"></i></button>
+          <button class="button is-light is-rounded" id="info-activate">App Info <i class="fas fa-bars"></i></button>
         </div>
       </div>
   </nav>
@@ -66,10 +66,10 @@
   <!-- NEW QUOTE FORM  -->
 <div class="container">
 
-  <section class="section">
+  <section class="section" id="new-quote-section">
 
-    <a role="button" class="is-size-3 has-text-primary">Add a New Quote</a>
-    <form id="quote" class="form" method="post">
+    <a role="button" class="is-size-3 has-text-primary" id="new-quote-heading"><i class="fas" id="new-quote-icon"></i> Add a New Quote</a>
+    <form id="new-quote-form" class="form" method="post">
       <div class="field">
         <label for="content" class="label">Quote Content:</label>
         <div class="control">
@@ -110,7 +110,7 @@
   </section>
 
  <!-- ALL QUOTES --> 
-  <section class="section">
+  <section class="section" id="all-quotes-section">
     <a role="button" class="is-size-3 has-text-primary" id="show-quotes"><i class="fas fa-bars" id="show-all-icon"></i> Show All Quotes</a>
     <div id="quote-container" class="container"><br></div>
   </section>  

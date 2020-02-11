@@ -138,6 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let showAllButton = document.getElementById('show-quotes')
     let allQuotes = document.getElementById('quote-container')
     let showAllIcon = document.getElementById('show-all-icon')
+    allQuotes.style.display = "none"
     showAllButton.addEventListener("click", () => {
     if(allQuotes.style.display === "none") {
       allQuotes.style.display = "block"
@@ -150,7 +151,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     })
 
-    // Form submission event listener
+    //Hide and Show New Quote Form 
+    let showFormButton = document.getElementById('new-quote-heading')
+    let newQuoteIcon = document.getElementById('new-quote-icon')
+    let newQuoteForm = document.getElementById('new-quote-form')
+    newQuoteForm.style.display = "none"
+    newQuoteIcon.classList.add('fa-plus')
+    showFormButton.addEventListener("click", () => {
+      if(newQuoteForm.style.display === "none"){
+        newQuoteForm.style.display = "block"
+        newQuoteIcon.classList.remove("fa-plus")
+        newQuoteIcon.classList.add('fa-times')
+      } else {
+        newQuoteForm.style.display = "none"
+        newQuoteIcon.classList.remove("fa-times")
+        newQuoteIcon.classList.add('fa-plus')
+      }
+    })
+
+
+    // Form submission event listener and handling 
     let submitButton = document.getElementById('submit-quote')
     submitButton.addEventListener("click", (event) => {
       let quoteContent = document.getElementById('new-quote-content')

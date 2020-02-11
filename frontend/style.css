@@ -1,3 +1,7 @@
 i {
   padding: 1rem;
 }
+
+#all-quotes-section, #new-quote-section {
+  padding: 2rem;
+}
