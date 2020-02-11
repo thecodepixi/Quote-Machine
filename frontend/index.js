@@ -24,7 +24,8 @@ class Quote {
       deleteButton.classList.add('tag', 'is-danger')
       deleteButton.id = this.id 
       deleteButton.addEventListener("click", () => {
-        deleteQuote(this.id)
+        this.deleteQuote()
+        thisDiv.remove()
       })
       buttonDiv.appendChild(deleteButton)
       let hr = document.createElement('hr')
@@ -65,19 +66,19 @@ class Quote {
         randomAuthor.textContent = newQuote.author 
       })
   }
-}
 
-function deleteQuote(quoteId){
-  fetch(`http://localhost:3000/quotes/${quoteId}`, {
-    method: 'DELETE',
-    headers: {
-      "Content-Type": "application/json",
-      "Accept": "application/json",
-    }
-  })
-    .then(resp => resp.json())
-    .then(json => console.log(json))
-    .catch(error => alert(error))
+  deleteQuote(){
+    fetch(`http://localhost:3000/quotes/${this.id}`, {
+      method: 'DELETE',
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      }
+    })
+      .then(resp => resp.json())
+      .then(json => console.log(json))
+      .catch(error => alert(error.message))
+  }
 }
 
 function fetchRandomQuote() {
