@@ -94,11 +94,18 @@ function fetchRandomQuote() {
 }
 
 function renderQuotes(quotes){
+  // for(quote of quotes) {
+  //   let container = document.getElementById('quote-container')
+  //   let thisQuoteDiv = quote.createQuoteElement(); 
+  //   container.prepend(thisQuoteDiv)
+  // }
+  
+}
+
+function saveQuotes(array, quotes){
   for(quote of quotes) {
-    let container = document.getElementById('quote-container')
     let thisQuote = new Quote(quote.id, quote.content, quote.author.name, quote.theme.name)
-    let thisQuoteDiv = thisQuote.createQuoteElement(); 
-    container.prepend(thisQuoteDiv)
+    array.push(thisQuote)
   }
 }
 
@@ -106,10 +113,14 @@ function renderQuotes(quotes){
 // DOM CONTENT LOADED -- call functions here 
 document.addEventListener("DOMContentLoaded", () => {
 
+  const QUOTES = []
+
   // Render All Quotes 
   fetch('http://localhost:3000/quotes/')
   .then(resp => resp.json())
-  .then(json => renderQuotes(json))
+  .then(json => saveQuotes(QUOTES, json))
+
+  renderQuotes(QUOTES)
 
   // populate hero with initial random quote 
   fetchRandomQuote()
