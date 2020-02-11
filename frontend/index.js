@@ -37,6 +37,12 @@ class Quote {
       return thisDiv 
   }
 
+  renderQuote() {
+    let container = document.getElementById('quote-container')
+    let thisQuoteDiv = this.createQuoteElement(); 
+    container.prepend(thisQuoteDiv)
+  }
+
   renderAsRandom(){
     let randomContent = document.getElementById('random-quote-content')
     let randomAuthor = document.getElementById('random-quote-author')
@@ -93,34 +99,30 @@ function fetchRandomQuote() {
     })
 }
 
-function renderQuotes(quotes){
-  // for(quote of quotes) {
-  //   let container = document.getElementById('quote-container')
-  //   let thisQuoteDiv = quote.createQuoteElement(); 
-  //   container.prepend(thisQuoteDiv)
-  // }
-  
-}
-
-function saveQuotes(array, quotes){
+function saveQuotes(quotesObj, quotes){
   for(quote of quotes) {
     let thisQuote = new Quote(quote.id, quote.content, quote.author.name, quote.theme.name)
-    array.push(thisQuote)
+    quotesObj.push(thisQuote)
   }
+}
+
+function renderQuotes(quotesArray, quotes){
+  saveQuotes(quotesArray, quotes)
+  quotesArray.forEach( quote => {
+    quote.renderQuote()
+  })
 }
 
 
 // DOM CONTENT LOADED -- call functions here 
 document.addEventListener("DOMContentLoaded", () => {
 
-  const QUOTES = []
+  const quotesArray = []
 
   // Render All Quotes 
   fetch('http://localhost:3000/quotes/')
   .then(resp => resp.json())
-  .then(json => saveQuotes(QUOTES, json))
-
-  renderQuotes(QUOTES)
+  .then(json => renderQuotes(quotesArray, json))
 
   // populate hero with initial random quote 
   fetchRandomQuote()
