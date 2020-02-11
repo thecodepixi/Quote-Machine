@@ -49,7 +49,6 @@ class Quote {
     let randomAuthor = document.getElementById('random-quote-author')
     randomContent.textContent = this.content 
     randomAuthor.textContent = this.author 
-    console.log(this.theme)
   }
 
   sendToDBandRender(){
@@ -72,7 +71,9 @@ class Quote {
         let randomAuthor = document.getElementById('random-quote-author')
         randomContent.textContent = newQuote.content 
         randomAuthor.textContent = newQuote.author 
+        randomHeroBackgroundColor()
       })
+      .catch(error => alert(error.message))
   }
 
   deleteQuote(){
@@ -98,7 +99,9 @@ function fetchRandomQuote() {
     .then(json => {
       let randomQuote = new Quote(json.id, json.content, json.author.name, json.theme.name)
       randomQuote.renderAsRandom()
+      randomHeroBackgroundColor()
     })
+    .catch(error => alert(error.message))
 }
 
 function fetchRandomByTheme(theme) {
@@ -107,7 +110,9 @@ function fetchRandomByTheme(theme) {
     .then(json => {
       let randomQuote = new Quote(json.id, json.content, json.author.name, json.theme.name)
       randomQuote.renderAsRandom()
+      randomHeroBackgroundColor()
     })
+    .catch(error => alert(error.message))
 }
 
 function saveQuotes(quotesObj, quotes){
@@ -117,11 +122,26 @@ function saveQuotes(quotesObj, quotes){
   }
 }
 
-function renderQuotes(quotesArray, quotes){
-  saveQuotes(quotesArray, quotes)
-  quotesArray.forEach( quote => {
+function renderQuotes(quotesObj, quotes){
+  saveQuotes(quotesObj, quotes)
+  quotesObj.forEach( quote => {
     quote.renderQuote()
   })
+}
+
+function generateRandomColor(){
+  let possibleChars = [0,1,2,'b','c','d']
+  let hex = '#'
+  while (hex.length < 7) {
+    hex += (possibleChars[Math.floor(Math.random() * possibleChars.length)])
+  }
+  console.log(hex)
+  return hex 
+}
+
+function randomHeroBackgroundColor(){
+  let hero = document.getElementsByClassName("hero")[0]
+  hero.style.backgroundColor = generateRandomColor()
 }
 
 
@@ -134,6 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch('http://localhost:3000/quotes/')
   .then(resp => resp.json())
   .then(json => renderQuotes(quotesArray, json))
+  .catch(error => alert(error.message))
 
   // populate hero with initial random quote 
   fetchRandomQuote()
