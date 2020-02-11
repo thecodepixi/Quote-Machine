@@ -16,6 +16,7 @@ class Quote {
       author.classList.add('is-uppercase')
       let theme = document.createElement('small')
       theme.textContent = this.theme
+      theme.classList.add("is-capitalized")
 
       let buttonDiv = document.createElement('div')
       buttonDiv.classList.add('buttons', 'is-pulled-right')
@@ -48,6 +49,7 @@ class Quote {
     let randomAuthor = document.getElementById('random-quote-author')
     randomContent.textContent = this.content 
     randomAuthor.textContent = this.author 
+    console.log(this.theme)
   }
 
   sendToDBandRender(){
@@ -92,6 +94,15 @@ function fetchRandomQuote() {
   let randomQuoteIndex = Math.floor(Math.random() * quoteQuantity)
 
   fetch(`http://localhost:3000/quotes/${randomQuoteIndex}`)
+    .then(resp => resp.json())
+    .then(json => {
+      let randomQuote = new Quote(json.id, json.content, json.author.name, json.theme.name)
+      randomQuote.renderAsRandom()
+    })
+}
+
+function fetchRandomByTheme(theme) {
+  fetch(`http://localhost:3000/themes/${theme}`)
     .then(resp => resp.json())
     .then(json => {
       let randomQuote = new Quote(json.id, json.content, json.author.name, json.theme.name)
@@ -197,5 +208,13 @@ document.addEventListener("DOMContentLoaded", () => {
       
       event.preventDefault()
     })
+
+    //Click handler for random quote by theme 
+    let themeButtons = document.getElementsByClassName("theme-link")
+    for(let i = 0; i < themeButtons.length; i++) {
+      themeButtons[i].addEventListener("click", () => {
+        fetchRandomByTheme(themeButtons[i].children[0].id)
+      })
+    }
 
 })

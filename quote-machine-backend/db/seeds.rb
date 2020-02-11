@@ -5,13 +5,21 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-# until Author.all.count === 10 
-#   Author.create(name: Faker::Book.author)
-# end 
 
-# until Theme.all.count === 10 
-#   Theme.create(name: Faker::Book.genre)
-# end  
+Author.all.destroy_all
+Theme.all.destroy_all 
+Quote.all.destroy_all 
+
+
+until Author.all.count === 10 
+  Author.create(name: Faker::Book.author)
+end 
+
+themes = ["inspirational", "wisdom", "humor", "love", "success", "motivational", "joy", "science"] 
+
+themes.each do |theme |
+  Theme.create(name: theme)
+end 
 
 until Quote.all.count === 50 
   q = Quote.new(content: Faker::Movie.quote)
