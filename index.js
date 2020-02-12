@@ -133,7 +133,6 @@ function generateRandomColor(){
   while (hex.length < 7) {
     hex += (possibleChars[Math.floor(Math.random() * possibleChars.length)])
   }
-  console.log(hex)
   return hex 
 }
 
@@ -237,7 +236,6 @@ document.addEventListener("DOMContentLoaded", () => {
     //Filter quotes by theme 
     function filterByTheme() {
       document.getElementById("filter-by-theme").onchange = function () { 
-        console.log(this.value)
         let theme = this.value.toLowerCase()
         let quotes = document.getElementsByClassName("quote")
         for(let i = 0; i < quotes.length; i++){
@@ -252,10 +250,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
        } 
     }
+    filterByTheme();
+
     // Filter by author 
     function filterByAuthor() {
       document.getElementById("filter-by-author").oninput = function () {
-        console.log(this.value)
         let theme = this.value.toLowerCase()
         let quotes = document.getElementsByClassName("quote")
         for(let i = 0; i < quotes.length; i++){
@@ -270,7 +269,5 @@ document.addEventListener("DOMContentLoaded", () => {
         }
        } 
     }
-
-    filterByTheme();
     filterByAuthor(); 
 })
