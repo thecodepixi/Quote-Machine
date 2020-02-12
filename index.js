@@ -11,29 +11,19 @@ class Quote {
     thisDiv.classList.add("quote")
       let quoteText = document.createElement('p')
       quoteText.textContent = this.content 
+      let quoteDetails = document.createElement('div')
       let author = document.createElement('small')
       author.textContent = `${this.author} --  `
       author.classList.add('is-uppercase')
       let theme = document.createElement('small')
       theme.textContent = this.theme
       theme.classList.add("is-capitalized")
-
-      let buttonDiv = document.createElement('div')
-      buttonDiv.classList.add('buttons', 'is-pulled-right')
-      let deleteButton = document.createElement('button')
-      deleteButton.textContent = 'Delete'
-      deleteButton.classList.add('tag', 'is-danger')
-      deleteButton.id = this.id 
-      deleteButton.addEventListener("click", () => {
-        this.deleteQuote()
-        thisDiv.remove()
-      })
-      buttonDiv.appendChild(deleteButton)
+      quoteDetails.appendChild(author)
+      quoteDetails.appendChild(theme)
+      quoteDetails.classList.add('is-pulled-right')
+      quoteText.appendChild(quoteDetails)
       let hr = document.createElement('hr')
       thisDiv.appendChild(quoteText) 
-      thisDiv.appendChild(author)
-      thisDiv.appendChild(theme)
-      thisDiv.appendChild(buttonDiv)
       thisDiv.appendChild(hr)
       return thisDiv 
   }
@@ -176,9 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
     navbarInfo.style.display = "none"
     navbarButton.addEventListener("click", () => {
       if(navbarInfo.style.display === "none") {
-        navbarInfo.style.display = "block"
-        navbarInfo.style.position = "absolute"
-        navbarInfo.style.zIndex = 1
+        navbarInfo.style.display = "flex"
       } else {
         navbarInfo.style.display = "none"
       }

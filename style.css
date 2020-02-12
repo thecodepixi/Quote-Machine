@@ -23,3 +23,13 @@ i {
 	display: flex;
 }
 
+#navbar-info {
+  position: fixed;
+  flex-direction: column;
+  z-index: 1;
+}
+
+.quote p {
+  padding: .5rem 1.5rem;  
+  text-align: justify;
+}
