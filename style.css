@@ -48,7 +48,7 @@ i {
 }
 
 #hero-body {
-  width: 80vw;
+  width: 80%;
   align-self: center;
   padding: 1.5rem;
   display: flex;
@@ -67,5 +67,9 @@ i {
 
   #random-quote-author {
     font-size: 1rem;
+  }
+
+  #navbar-info {
+    width: 100vw;
   }
 }
