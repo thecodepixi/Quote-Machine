@@ -9,8 +9,10 @@ class Quote {
   createQuoteElement(){
     let thisDiv = document.createElement('div')
     thisDiv.classList.add("quote")
+    thisDiv.classList.add('columns')
       let quoteText = document.createElement('p')
       quoteText.textContent = this.content 
+      quoteText.classList.add('column')
       let quoteDetails = document.createElement('div')
       let author = document.createElement('small')
       author.textContent = `${this.author} --  `
@@ -21,16 +23,17 @@ class Quote {
       quoteDetails.appendChild(author)
       quoteDetails.appendChild(theme)
       quoteDetails.classList.add('is-pulled-right')
-      quoteText.appendChild(quoteDetails)
-      let hr = document.createElement('hr')
+      quoteDetails.style.alignSelf = "center"
       thisDiv.appendChild(quoteText) 
-      thisDiv.appendChild(hr)
+      thisDiv.appendChild(quoteDetails)
       return thisDiv 
   }
 
   renderQuote() {
     let container = document.getElementById('quote-container')
     let thisQuoteDiv = this.createQuoteElement(); 
+    let hr = document.createElement("hr")
+    container.prepend(hr)
     container.prepend(thisQuoteDiv)
   }
 
