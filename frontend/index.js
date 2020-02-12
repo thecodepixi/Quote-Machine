@@ -52,7 +52,7 @@ class Quote {
   }
 
   sendToDBandRender(){
-    fetch('http://localhost:3000/quotes', {
+    fetch('https://quote-machine-backend-api.herokuapp.com/quotes', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +77,7 @@ class Quote {
   }
 
   deleteQuote(){
-    fetch(`http://localhost:3000/quotes/${this.id}`, {
+    fetch(`https://quote-machine-backend-api.herokuapp.com/quotes/${this.id}`, {
       method: 'DELETE',
       headers: {
         "Content-Type": "application/json",
@@ -94,18 +94,23 @@ function fetchRandomQuote() {
   let quoteQuantity = document.querySelectorAll("div.quote").length
   let randomQuoteIndex = Math.floor(Math.random() * quoteQuantity)
 
-  fetch(`http://localhost:3000/quotes/${randomQuoteIndex}`)
+  fetch(`https://quote-machine-backend-api.herokuapp.com/quotes/${randomQuoteIndex}`)
     .then(resp => resp.json())
     .then(json => {
-      let randomQuote = new Quote(json.id, json.content, json.author.name, json.theme.name)
-      randomQuote.renderAsRandom()
+      if( json == null) {
+        let heroContent = document.getElementById("random-quote-content")
+        heroContent.textContent = "Start by adding a new quote using the form below!"
+      } else {
+        let randomQuote = new Quote(json.id, json.content, json.author.name, json.theme.name)
+        randomQuote.renderAsRandom()
+      }
       randomHeroBackgroundColor()
     })
     .catch(error => alert(error.message))
 }
 
 function fetchRandomByTheme(theme) {
-  fetch(`http://localhost:3000/themes/${theme}`)
+  fetch(`https://quote-machine-backend-api.herokuapp.com/themes/${theme}`)
     .then(resp => resp.json())
     .then(json => {
       let randomQuote = new Quote(json.id, json.content, json.author.name, json.theme.name)
@@ -151,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const quotesArray = []
 
   // Render All Quotes 
-  fetch('http://localhost:3000/quotes/')
+  fetch('https://quote-machine-backend-api.herokuapp.com/quotes')
   .then(resp => resp.json())
   .then(json => renderQuotes(quotesArray, json))
   .catch(error => alert(error.message))

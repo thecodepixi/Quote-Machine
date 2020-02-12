@@ -1,5 +1,9 @@
 i {
-  padding: 1rem;
+  padding: .5rem;
+}
+
+#random-quote-reload {
+  padding: 1rem 2rem;
 }
 
 #all-quotes-section, #new-quote-section {
@@ -7,6 +11,6 @@ i {
 }
 
 .hero {
-  background-image: linear-gradient(141deg, rgba(0,0,0,0.5),rgba(100,100,100,0.5),rgba(255, 255, 255, 0.75));
+  background-image: linear-gradient(141deg, rgba(255,255,255,0.5),rgba(100,100,100,0.5),rgba(0, 0, 0, 0.75));
 }
 

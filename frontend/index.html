@@ -13,9 +13,9 @@
 <body>
 
   <!-- NAVBAR -->
-  <nav class="navbar is-primary">
+  <nav class="navbar is-dark">
     <div class="navbar-brand">
-      <a href="#" class="navbar-item">
+      <a class="navbar-item">
         <h1 class="is-size-3">Quote Machine</h1>
       </a>
     </div>  
@@ -72,7 +72,7 @@
 
   <section class="section" id="new-quote-section">
 
-    <a role="button" class="is-size-3 has-text-primary" id="new-quote-heading"><i class="fas" id="new-quote-icon"></i> Add a New Quote</a>
+    <a role="button" class="is-size-3 has-text-dark" id="new-quote-heading"><i class="fas" id="new-quote-icon"></i> Add a New Quote</a>
     <form id="new-quote-form" class="form" method="post">
       <div class="field">
         <label for="content" class="label">Quote Content:</label>
@@ -81,7 +81,7 @@
         </div>
       </div>
       <div class="field">
-        <label for="author" class="label">Quote Author:</label>
+        <label for="author" class="label">Quote Author/Source:</label>
         <div class="control">
           <input type="text" class="input" placeholder="Author Name" id="new-quote-author">
         </div>
@@ -93,12 +93,12 @@
             <select name="theme" id="new-quote-theme">
               <option value="inspirational">Inspirational</option>
               <option value="humor">Humor</option>
-              <option value="Inspiring">Inspiring</option>
               <option value="wisdom">Wisdom</option>
               <option value="love">Love</option>
               <option value="motivational">Motivational</option>
               <option value="joy">Joy</option>
               <option value="science">Science</option>
+              <option value="success">Success</option>
             </select>
           </div>
         </div>
@@ -116,7 +116,7 @@
 
  <!-- ALL QUOTES --> 
   <section class="section" id="all-quotes-section">
-    <a role="button" class="is-size-3 has-text-primary" id="show-quotes"><i class="fas fa-bars" id="show-all-icon"></i> Show All Quotes</a>
+    <a role="button" class="is-size-3 has-text-dark" id="show-quotes"><i class="fas fa-bars" id="show-all-icon"></i> Show All Quotes</a>
     <div id="quote-container" class="container"><br></div>
   </section>  
 </div>

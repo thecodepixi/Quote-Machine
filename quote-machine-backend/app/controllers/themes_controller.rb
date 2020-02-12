@@ -6,4 +6,10 @@ class ThemesController < ApplicationController
     render json: QuoteSerializer.new(quote).to_serialized_json 
   end 
 
+  def index 
+    themes = Theme.all 
+
+    render json: themes 
+  end 
+
 end
