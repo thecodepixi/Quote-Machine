@@ -68,7 +68,7 @@ class Quote {
       })
       .catch(error => alert(error.message))
   }
-
+// THIS FUNCTION IS CURRENTLY NOT USED FOR THE DEPLOYED APP (don't want people deleting all my data)
   deleteQuote(){
     fetch(`https://quote-machine-backend-api.herokuapp.com/quotes/${this.id}`, {
       method: 'DELETE',
@@ -234,4 +234,26 @@ document.addEventListener("DOMContentLoaded", () => {
       })
     }
 
+    //Filter quotes by theme 
+    function filterByTheme() {
+      document.getElementById("filter-by-theme").onchange = filter 
+
+      function filter(){
+        console.log(this.value)
+        let theme = this.value 
+        let quotes = document.getElementsByClassName("quote")
+        for(let i = 0; i < quotes.length; i++){
+          let quoteDetails = quotes[i].querySelector("div")
+          if (!quoteDetails.textContent.includes(theme)) {
+            quotes[i].style.display = "none"
+            quotes[i].nextElementSibling.style.display = "none"
+          } else if (quoteDetails.textContent.includes(theme)){
+            quotes[i].style.display = "flex"
+            quotes[i].nextSibling.style.display = "block"
+          }
+        }
+      }
+    }
+
+    filterByTheme();
 })
