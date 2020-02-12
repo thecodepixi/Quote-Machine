@@ -5,15 +5,18 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+# Theme.all.destroy_all 
+# Quote.all.destroy_all 
 
-themes = ['inspirational', 'wisdom', 'humor', 'love', 'success', 'motivational', 'joy', 'science']
+# themes = ['inspirational', 'wisdom', 'humor', 'love', 'success', 'motivational', 'joy', 'science']
 
-themes.each do |theme| 
-  Theme.create(name: theme)
-end 
+# themes.each do |theme| 
+#   Theme.create(name: theme)
+# end 
 
-testQuote = Quote.new(content: "This is a test quote.")
-author = Author.create(name: "Emily Harber")
-testQuote.author = author 
-testQuote.theme_id = 1
-testQuote.save 
+until Quote.all.count == 50 
+    quote = Quote.new(content: Faker::TvShows::Buffy.quote)
+    quote.author = Author.find_or_create_by(name: Faker::TvShows::Buffy.character.downcase)
+    quote.theme = Theme.all.sample 
+    quote.save 
+end
