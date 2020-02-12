@@ -7,7 +7,7 @@ i {
 }
 
 #all-quotes-section, #new-quote-section {
-  padding: 2rem;
+  padding: 1rem 2rem;
 }
 
 .hero {
@@ -16,6 +16,10 @@ i {
 
 #main-quote {
   height: 60vh;
+}
+
+#main-quote-section {
+  padding: 2rem 1.5rem;
 }
 
 .navbar {
@@ -35,6 +39,24 @@ i {
 }
 
 #hero-body {
-  width: 50vw;
+  width: 80vw;
   align-self: center;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  #main-quote {
+    height: 75vh; 
+  }
+
+  #random-quote-content {
+    font-size: 1.5rem;
+    padding-bottom: 1rem;
+  }
+
+  #random-quote-author {
+    font-size: 1rem;
+  }
 }
