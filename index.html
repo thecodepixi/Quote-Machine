@@ -18,28 +18,26 @@
       <a class="navbar-item">
         <h1 class="is-size-3">Quote Machine</h1>
       </a>
-    </div>  
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <button class="button is-light is-rounded" id="info-activate">App Info <i class="fas fa-bars"></i></button>
-        </div>
+    </div> 
+      <div class="navbar-item" id="info-button">
+        <button class="button is-light is-rounded" id="info-activate">App Info <i class="fas fa-bars"></i></button>
       </div>
   </nav>
 <!-- PAGE INFO MODAL -->
-  <div id="navbar-info">
-    <div class="box">
+<div id="navbar-info-parent">
+  <div class="box" id="navbar-info">
       <p>Click <strong><i class="fas fa-redo"></i></strong> this icon to receive a quote at random.</p>
       <p>Click any of the tabs below the random quote to receive a random quote <strong>with that theme.</strong></p>
       <p>Click <strong><i class="fas fa-plus"></i>Add a New Quote</strong> to access to form to upload a new quote to the database.</p>
       <p>Click <strong><i class="fas fa-bars"></i>Show All Quotes</strong> to view all available quotes (and delete any you wish to).</p>
       <p></p>
-    </div>
   </div>
+</div>
 
   <!-- RANDOM QUOTE HERO SECTION -->
-  <div class="section">
+  <div class="section" id="main-quote-section">
     <div class="container">
-      <div class="hero is-medium" id="main-quote">
+      <div class="hero" id="main-quote">
         <a class="has-text-light is-size-2" id="random-quote-reload"><i class="fas fa-redo is-pulled-right"></i></a>
         <div class="hero-body" id="hero-body">
           <div class="container has-text-centered">
@@ -105,7 +103,7 @@
       </div>
       <div class="field">
         <p class="control">
-          <button class="button is-primary" id="submit-quote">
+          <button class="button is-dark" id="submit-quote">
             Submit
           </button>
         </p>
@@ -117,6 +115,34 @@
  <!-- ALL QUOTES --> 
   <section class="section" id="all-quotes-section">
     <a role="button" class="is-size-3 has-text-dark" id="show-quotes"><i class="fas fa-bars" id="show-all-icon"></i> Show All Quotes</a>
+    <div class="columns">
+      <div class="column">
+        <label for="filter-by-theme" class="label">Filter By Theme:</label>
+        <div class="select">
+          <div class="control">
+            <select name="filter-by-theme" id="filter-by-theme">
+              <option value=""></option>
+              <option value="inspirational">Inspirational</option>
+              <option value="humor">Humor</option>
+              <option value="wisdom">Wisdom</option>
+              <option value="love">Love</option>
+              <option value="motivational">Motivational</option>
+              <option value="joy">Joy</option>
+              <option value="science">Science</option>
+              <option value="success">Success</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="field">
+          <label for="filter-by-author" class="label">Filter By Author/Source:</label>
+          <div class="control">
+            <input type="text" class="input" id="filter-by-author" placeholder="Start typing to filter...">
+          </div>
+        </div>
+      </div>
+    </div>
     <div id="quote-container" class="container"><br></div>
   </section>  
 </div>

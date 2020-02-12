@@ -7,10 +7,65 @@ i {
 }
 
 #all-quotes-section, #new-quote-section {
-  padding: 2rem;
+  padding: 1rem 2rem;
+}
+
+#quote-container {
+  padding-top: 2rem;
 }
 
 .hero {
   background-image: linear-gradient(141deg, rgba(255,255,255,0.5),rgba(100,100,100,0.5),rgba(0, 0, 0, 0.75));
 }
 
+#main-quote {
+  height: 60vh;
+}
+
+#main-quote-section {
+  padding: 2rem 1.5rem;
+}
+
+.navbar {
+	justify-content: space-between;
+	display: flex;
+}
+
+#navbar-info-parent {
+  display: flex;
+  justify-content: right;
+}
+
+#navbar-info {
+  position: fixed;
+  flex-direction: column;
+  z-index: 1;
+}
+
+.quote p {
+  padding: .5rem 1.5rem;  
+  text-align: justify;
+}
+
+#hero-body {
+  width: 80vw;
+  align-self: center;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  #main-quote {
+    height: 75vh; 
+  }
+
+  #random-quote-content {
+    font-size: 1.5rem;
+    padding-bottom: 1rem;
+  }
+
+  #random-quote-author {
+    font-size: 1rem;
+  }
+}

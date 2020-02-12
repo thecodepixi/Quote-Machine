@@ -9,38 +9,31 @@ class Quote {
   createQuoteElement(){
     let thisDiv = document.createElement('div')
     thisDiv.classList.add("quote")
+    thisDiv.classList.add('columns')
       let quoteText = document.createElement('p')
       quoteText.textContent = this.content 
+      quoteText.classList.add('column')
+      let quoteDetails = document.createElement('div')
       let author = document.createElement('small')
       author.textContent = `${this.author} --  `
       author.classList.add('is-uppercase')
       let theme = document.createElement('small')
       theme.textContent = this.theme
       theme.classList.add("is-capitalized")
-
-      let buttonDiv = document.createElement('div')
-      buttonDiv.classList.add('buttons', 'is-pulled-right')
-      let deleteButton = document.createElement('button')
-      deleteButton.textContent = 'Delete'
-      deleteButton.classList.add('tag', 'is-danger')
-      deleteButton.id = this.id 
-      deleteButton.addEventListener("click", () => {
-        this.deleteQuote()
-        thisDiv.remove()
-      })
-      buttonDiv.appendChild(deleteButton)
-      let hr = document.createElement('hr')
+      quoteDetails.appendChild(author)
+      quoteDetails.appendChild(theme)
+      quoteDetails.classList.add('is-pulled-right')
+      quoteDetails.style.alignSelf = "center"
       thisDiv.appendChild(quoteText) 
-      thisDiv.appendChild(author)
-      thisDiv.appendChild(theme)
-      thisDiv.appendChild(buttonDiv)
-      thisDiv.appendChild(hr)
+      thisDiv.appendChild(quoteDetails)
       return thisDiv 
   }
 
   renderQuote() {
     let container = document.getElementById('quote-container')
     let thisQuoteDiv = this.createQuoteElement(); 
+    let hr = document.createElement("hr")
+    container.prepend(hr)
     container.prepend(thisQuoteDiv)
   }
 
@@ -75,7 +68,7 @@ class Quote {
       })
       .catch(error => alert(error.message))
   }
-
+// THIS FUNCTION IS CURRENTLY NOT USED FOR THE DEPLOYED APP (don't want people deleting all my data)
   deleteQuote(){
     fetch(`https://quote-machine-backend-api.herokuapp.com/quotes/${this.id}`, {
       method: 'DELETE',
@@ -140,7 +133,6 @@ function generateRandomColor(){
   while (hex.length < 7) {
     hex += (possibleChars[Math.floor(Math.random() * possibleChars.length)])
   }
-  console.log(hex)
   return hex 
 }
 
@@ -176,9 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
     navbarInfo.style.display = "none"
     navbarButton.addEventListener("click", () => {
       if(navbarInfo.style.display === "none") {
-        navbarInfo.style.display = "block"
-        navbarInfo.style.position = "absolute"
-        navbarInfo.style.zIndex = 1
+        navbarInfo.style.display = "flex"
       } else {
         navbarInfo.style.display = "none"
       }
@@ -243,4 +233,41 @@ document.addEventListener("DOMContentLoaded", () => {
       })
     }
 
+    //Filter quotes by theme 
+    function filterByTheme() {
+      document.getElementById("filter-by-theme").onchange = function () { 
+        let theme = this.value.toLowerCase()
+        let quotes = document.getElementsByClassName("quote")
+        for(let i = 0; i < quotes.length; i++){
+          let quoteTheme = quotes[i].querySelector("div").children[1]
+          if (!quoteTheme.textContent.includes(theme)) {
+            quotes[i].style.display = "none"
+            quotes[i].nextElementSibling.style.display = "none"
+          } else if (quoteTheme.textContent.includes(theme)){
+            quotes[i].style.display = "flex"
+            quotes[i].nextSibling.style.display = "block"
+          }
+        }
+       } 
+    }
+    filterByTheme();
+
+    // Filter by author 
+    function filterByAuthor() {
+      document.getElementById("filter-by-author").oninput = function () {
+        let theme = this.value.toLowerCase()
+        let quotes = document.getElementsByClassName("quote")
+        for(let i = 0; i < quotes.length; i++){
+          let quoteAuthor = quotes[i].querySelector("div").children[0]
+          if (!quoteAuthor.textContent.includes(theme)) {
+            quotes[i].style.display = "none"
+            quotes[i].nextElementSibling.style.display = "none"
+          } else if (quoteAuthor.textContent.includes(theme)){
+            quotes[i].style.display = "flex"
+            quotes[i].nextSibling.style.display = "block"
+          }
+        }
+       } 
+    }
+    filterByAuthor(); 
 })
