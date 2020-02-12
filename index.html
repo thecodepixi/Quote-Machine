@@ -24,13 +24,15 @@
       </div>
   </nav>
 <!-- PAGE INFO MODAL -->
-  <div id="navbar-info" class="box">
+<div id="navbar-info-parent">
+  <div class="box" id="navbar-info">
       <p>Click <strong><i class="fas fa-redo"></i></strong> this icon to receive a quote at random.</p>
       <p>Click any of the tabs below the random quote to receive a random quote <strong>with that theme.</strong></p>
       <p>Click <strong><i class="fas fa-plus"></i>Add a New Quote</strong> to access to form to upload a new quote to the database.</p>
       <p>Click <strong><i class="fas fa-bars"></i>Show All Quotes</strong> to view all available quotes (and delete any you wish to).</p>
       <p></p>
   </div>
+</div>
 
   <!-- RANDOM QUOTE HERO SECTION -->
   <div class="section" id="main-quote-section">
@@ -134,9 +136,9 @@
       </div>
       <div class="column">
         <div class="field">
-          <label for="filter-by-author" class="label">Filter By Author:</label>
+          <label for="filter-by-author" class="label">Filter By Author/Source:</label>
           <div class="control">
-            <input type="text" class="input" id="filter-by-author" placeholder="Author Name">
+            <input type="text" class="input" id="filter-by-author" placeholder="Start typing to filter...">
           </div>
         </div>
       </div>
