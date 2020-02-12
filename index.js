@@ -55,16 +55,15 @@ class Quote {
     })
       .then(resp => resp.json())
       .then(json => {
-        let newQuote = new Quote(json.id, json.content, json.author.name, json.theme.name)
-        let container = document.getElementById('quote-container')
-        let thisQuoteDiv = newQuote.createQuoteElement(); 
-        container.prepend(thisQuoteDiv) 
 
-        let randomContent = document.getElementById('random-quote-content')
-        let randomAuthor = document.getElementById('random-quote-author')
-        randomContent.textContent = newQuote.content 
-        randomAuthor.textContent = newQuote.author 
+        if (json.message) {
+          alert(json.message)
+        } else {
+        let newQuote = new Quote(json.id, json.content, json.author.name, json.theme.name)
+        newQuote.renderQuote()
+        newQuote.renderAsRandom()
         randomHeroBackgroundColor()
+        }
       })
       .catch(error => alert(error.message))
   }

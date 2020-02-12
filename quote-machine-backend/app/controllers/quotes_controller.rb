@@ -21,7 +21,7 @@ class QuotesController < ApplicationController
     if quote.save 
       render json: QuoteSerializer.new(quote).to_serialized_json
     else 
-      render json: {message: "Sorry! There was an error with your quote."}
+      render json: {message: quote.errors.full_messages}
     end 
   end 
 
