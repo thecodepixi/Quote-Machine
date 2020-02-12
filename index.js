@@ -236,24 +236,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //Filter quotes by theme 
     function filterByTheme() {
-      document.getElementById("filter-by-theme").onchange = filter 
-
-      function filter(){
+      document.getElementById("filter-by-theme").onchange = function () { 
         console.log(this.value)
-        let theme = this.value 
+        let theme = this.value.toLowerCase()
         let quotes = document.getElementsByClassName("quote")
         for(let i = 0; i < quotes.length; i++){
-          let quoteDetails = quotes[i].querySelector("div")
-          if (!quoteDetails.textContent.includes(theme)) {
+          let quoteTheme = quotes[i].querySelector("div").children[1]
+          if (!quoteTheme.textContent.includes(theme)) {
             quotes[i].style.display = "none"
             quotes[i].nextElementSibling.style.display = "none"
-          } else if (quoteDetails.textContent.includes(theme)){
+          } else if (quoteTheme.textContent.includes(theme)){
             quotes[i].style.display = "flex"
             quotes[i].nextSibling.style.display = "block"
           }
         }
-      }
+       } 
+    }
+    // Filter by author 
+    function filterByAuthor() {
+      document.getElementById("filter-by-author").oninput = function () {
+        console.log(this.value)
+        let theme = this.value.toLowerCase()
+        let quotes = document.getElementsByClassName("quote")
+        for(let i = 0; i < quotes.length; i++){
+          let quoteAuthor = quotes[i].querySelector("div").children[0]
+          if (!quoteAuthor.textContent.includes(theme)) {
+            quotes[i].style.display = "none"
+            quotes[i].nextElementSibling.style.display = "none"
+          } else if (quoteAuthor.textContent.includes(theme)){
+            quotes[i].style.display = "flex"
+            quotes[i].nextSibling.style.display = "block"
+          }
+        }
+       } 
     }
 
     filterByTheme();
+    filterByAuthor(); 
 })
