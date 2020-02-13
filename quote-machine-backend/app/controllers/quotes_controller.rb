@@ -25,11 +25,11 @@ class QuotesController < ApplicationController
     end 
   end 
 
-  def destroy 
-    quote = Quote.find_by(id: params[:id])
-    quote.destroy 
+  # def destroy 
+  #   quote = Quote.find_by(id: params[:id])
+  #   quote.destroy 
 
-    render json: QuoteSerializer.new(quote).to_serialized_json 
-  end 
+  #   render json: QuoteSerializer.new(quote).to_serialized_json 
+  # end 
 
 end
