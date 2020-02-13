@@ -127,12 +127,11 @@ function renderQuotes(quotesObj, quotes){
 }
 
 function generateRandomColor(){
-    let randomArray = [] 
-    while( randomArray.length < 6 ) { randomArray.push( 
-      (Math.floor(Math.random() * 15).toString(16) )
-    )}
-    console.log(randomArray.join(''))
-    return '#' + randomArray.join('') 
+  let randomHexCode = "#" 
+  while( randomHexCode.length < 7 ) { 
+     randomHexCode += (Math.floor(Math.random() * 15).toString(16) )
+  }
+  return randomHexCode 
 }
 
 function randomHeroBackgroundColor(){
