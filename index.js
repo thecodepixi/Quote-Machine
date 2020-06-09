@@ -268,4 +268,22 @@ document.addEventListener("DOMContentLoaded", () => {
        } 
     }
     filterByAuthor(); 
+
+
+    // function sortByAuthor(quotes){
+    //  let sortedQuotes = quotes.sort( (a,b) => {
+    //    return a.author.name.localCompare(b.author.name)
+    //  }) 
+    //  console.log(sortedQuotes)
+    // }
+
+    // // Sort by Author 
+    // let sortButton = document.getElementById("sort-by-author")
+    // sortButton.addEventListener("click", () => {
+    //    fetch('https://quote-machine-backend-api.herokuapp.com/quotes')
+    //   .then(resp => resp.json())
+    //   .then(json => sortByAuthor(json))
+    //   // .catch(error => alert(error.message)) 
+    // })
+   
 })
